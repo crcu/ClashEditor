@@ -26,7 +26,7 @@
                         <h2 class="h4 text-center sk-mb-4">Proxy 配置</h2>
                         <div class="text-justify ce-card-docs">
                             <p>在这里，您需要填充代理节点配置，注意代理配置第一行必须为 <code>Proxy:</code>。</p>
-                            <p>Clash 支持的代理类型有 <code>ss</code>、<code>vmess</code>、<code>socks5</code>、<code>http</code> 和 <code>snell</code>。</p>
+                            <p>Clash 支持的代理类型有 <code>ss</code>、<code>vmess</code>、<code>trojan</code></code>、<code>socks5</code>、<code>http</code> 和 <code>snell</code>。</p>
                             <p>您可以参考提供的样例配置直接在代码编辑器中直接添加，也可以使用 Clash Editor 提供的「添加向导」。</p>
                         </div>
                     </div>
@@ -35,6 +35,7 @@
                     <div class="card-body">
                         <button class="btn btn-info sk-m-1" data-toggle="modal" data-target="#ss-helper">Shadowsocks 添加向导</button>
                         <button class="btn btn-info sk-m-1" data-toggle="modal" data-target="#vmess-helper">Vmess 添加向导</button>
+                        <button class="btn btn-info sk-m-1" data-toggle="modal" data-target="#trojan-helper">Trojan 添加向导</button>
                         <button class="btn btn-info sk-m-1" data-toggle="modal" data-target="#online-helper">Clash 托管配置 添加向导</button>
                         <button class="btn btn-info sk-m-1" data-toggle="modal" data-target="#surge-helper">Surge.ini 添加向导</button>
                     </div>
@@ -229,6 +230,7 @@
                             <label for="vmess-tls" class="col-sm-4 col-form-label">skip-cert-verify</label>
                             <div class="col-sm-8">
                                 <select id="vmess-skip-cert-verify" class="form-control">
+                                    <option disabled selected>是否跳过证书认证</option>
                                     <option value="true">true</option>
                                     <option value="false">false</option>
                                 </select>
@@ -244,6 +246,80 @@
             </div>
         </div>
     </div>
+
+
+    <div id="trojan-helper" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title">Trojan 添加向导</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <form id="trojan-form" autocomplete="off">
+                        <div class="form-group row">
+                            <label for="trojan-type" class="col-sm-2 col-form-label">type</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control" id="trojan-type" value="trojan">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="trojan-name" class="col-sm-2 col-form-label">name</label>
+                            <div class="col-sm-10">
+                                <input id="trojan-name" type="text" class="form-control" placeholder="节点名称">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="trojan-server" class="col-sm-2 col-form-label">server</label>
+                            <div class="col-sm-10">
+                                <input id="trojan-server" type="text" class="form-control" placeholder="节点 IP 或域名">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="trojan-port" class="col-sm-2 col-form-label">port</label>
+                            <div class="col-sm-10">
+                                <input id="trojan-port" type="text" class="form-control" placeholder="端口">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="trojan-password" class="col-sm-2 col-form-label">password</label>
+                            <div class="col-sm-10">
+                                <input id="trojan-password" type="text" class="form-control" placeholder="节点连接密码">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="trojan-udp" class="col-sm-2 col-form-label">UDP</label>
+                            <div class="col-sm-10">
+                                <select id="trojan-udp" class="form-control">
+                                    <option disabled selected>是否启用UDP</option>
+                                    <option value="true">true</option>
+                                    <option value="false">false</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="trojan-skip-cert-verify" class="col-sm-4 col-form-label">skip-cert-verify</label>
+                            <div class="col-sm-8">
+                                <select id="trojan-skip-cert-verify" class="form-control">
+                                    <option disabled selected>是否跳过证书认证</option>
+                                    <option value="true">true</option>
+                                    <option value="false">false</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p class="sk-text-small">「Trojan 添加向导」不支持添加 SNI 与 ALPN 相关设置！<br>请使用添加向导填写相关信息以后手动在编辑器中添加相关字段，或直接使用编辑器填写全部节点信息！</p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button form="trojan-form" type="submit" class="btn btn-primary">确认</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
     <div id="online-helper" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">

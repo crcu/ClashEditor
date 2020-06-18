@@ -47,6 +47,17 @@ Proxy:
   # ws-headers:
   #   Host: v2ray.com
 
+# trojan
+- name: "trojan"
+  type: trojan
+  server: server
+  port: 443
+  password: "password"
+  # udp: true
+  # sni: example.com # aka server name
+  # alpn: h2 # or http/1.1
+  # skip-cert-verify: true
+
 # socks5
 - name: "socks"
   type: socks5

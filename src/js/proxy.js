@@ -22,7 +22,7 @@
                 if (proxyConfig.Proxy) {
                     try {
                         proxyConfig.Proxy.map(proxy => {
-                            if (proxy.type && proxy.type !== 'ss' && proxy.type !== 'vmess' && proxy.type !== 'socks5' && proxy.type !== 'http' && proxy.type !== 'snell') {
+                            if (proxy.type && proxy.type !== 'ss' && proxy.type !== 'vmess' && proxy.type !== 'trojan' && proxy.type !== 'socks5' && proxy.type !== 'http' && proxy.type !== 'snell') {
                                 throw new Error(proxy.type)
                             }
                         });
@@ -113,6 +113,23 @@
             }
         }).catch(error => {
             throw error;
+        })
+
+
+        document.getElementById('trojan-form').addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            const value = `${proxyCodeEditor.getValue()}
+    - name: "${getValue('trojan-name')}"
+      type: trojan
+      server: ${getValue('trojan-server')}
+      port: ${getValue('trojan-port')}
+      password: "${getValue('trojan-password')}"
+      skip-cert-verify: ${getValue('trojan-skip-cert-verify')}
+      udp: ${getValue('trojan-udp')}
+    `;
+            proxyCodeEditor.setValue(value);
+            document.getElementById('trojan-form').reset();
+            $('#trojan-helper').modal('hide')
         })
 
 
